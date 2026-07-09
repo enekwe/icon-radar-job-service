@@ -5,7 +5,7 @@
 
 import { Job } from 'bull';
 import axios from 'axios';
-import logger from '../utils/logger';
+import { logger } from '@enekwe/icon-radar-shared';
 import { BrandDiscoveryJobData } from '../types';
 import { brandDiscoveryQueue } from '../services/queueManager';
 

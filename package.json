@@ -17,6 +17,7 @@
     "db:push": "prisma db push"
   },
   "dependencies": {
+    "@enekwe/icon-radar-shared": "file:../icon-radar-shared",
     "@prisma/client": "^5.7.0",
     "axios": "^1.6.2",
     "bull": "^4.12.0",

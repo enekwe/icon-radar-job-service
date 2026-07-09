@@ -4,7 +4,7 @@
 
 import { Request, Response, NextFunction } from 'express';
 import { validationResult, ValidationChain } from 'express-validator';
-import logger from '../utils/logger';
+import { logger } from '@enekwe/icon-radar-shared';
 
 /**
  * Middleware to handle validation errors

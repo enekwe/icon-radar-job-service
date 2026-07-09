@@ -4,7 +4,7 @@
  */
 
 import cron from 'node-cron';
-import logger from '../utils/logger';
+import { logger } from '@enekwe/icon-radar-shared';
 import {
   addBrandDiscoveryJob,
   addMetricsJob,

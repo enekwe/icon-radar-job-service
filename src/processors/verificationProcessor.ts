@@ -5,7 +5,7 @@
 
 import { Job } from 'bull';
 import axios from 'axios';
-import logger from '../utils/logger';
+import { logger } from '@enekwe/icon-radar-shared';
 import { VerificationJobData } from '../types';
 import { verificationQueue } from '../services/queueManager';
 

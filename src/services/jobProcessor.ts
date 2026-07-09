@@ -4,7 +4,7 @@
  */
 
 import { Job } from 'bull';
-import logger from '../utils/logger';
+import { logger } from '@enekwe/icon-radar-shared';
 import { allQueues } from './queueManager';
 
 export class JobMonitor {

@@ -5,7 +5,7 @@
 
 import { Request, Response } from 'express';
 import { body, param, query } from 'express-validator';
-import logger from '../utils/logger';
+import { logger } from '@enekwe/icon-radar-shared';
 import {
   BatchProcessor,
   addBrandDiscoveryJob,

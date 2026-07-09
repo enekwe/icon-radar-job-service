@@ -3,7 +3,7 @@
  */
 
 import { Request, Response, NextFunction } from 'express';
-import logger from '../utils/logger';
+import { logger } from '@enekwe/icon-radar-shared';
 
 /**
  * Middleware to validate service API key for inter-service communication
@@ -24,17 +24,6 @@ export function requireServiceAuth(req: Request, res: Response, next: NextFuncti
     return;
   }
 
-  next();
-}
-
-/**
- * Middleware to add correlation ID to requests
- */
-export function correlationId(req: Request, res: Response, next: NextFunction): void {
-  req.correlationId = (req.headers['x-correlation-id'] as string) ||
-    `job-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-
-  res.setHeader('x-correlation-id', req.correlationId);
   next();
 }
 

@@ -5,7 +5,7 @@
 
 import Queue, { Job, JobOptions } from 'bull';
 import { EventEmitter } from 'events';
-import logger from '../utils/logger';
+import { logger } from '@enekwe/icon-radar-shared';
 import {
   BrandDiscoveryJobData,
   VerificationJobData,
