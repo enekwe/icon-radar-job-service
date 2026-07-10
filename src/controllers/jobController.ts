@@ -4,7 +4,7 @@
  */
 
 import { Request, Response } from 'express';
-import { body, param, query } from 'express-validator';
+import { body, param } from 'express-validator';
 import { logger } from '@enekwe/icon-radar-shared';
 import {
   BatchProcessor,
@@ -177,7 +177,7 @@ export const resumeBatch = [
 /**
  * Get all active batches
  */
-export const getActiveBatches = async (req: Request, res: Response): Promise<void> => {
+export const getActiveBatches = async (_req: Request, res: Response): Promise<void> => {
   try {
     const batches = await BatchProcessor.getActiveBatches();
 
@@ -423,7 +423,7 @@ export const deleteJob = [
 /**
  * Get queue statistics
  */
-export const getQueueStats = async (req: Request, res: Response): Promise<void> => {
+export const getQueueStats = async (_req: Request, res: Response): Promise<void> => {
   try {
     const queueStatuses = await getQueueStatuses();
 
@@ -447,7 +447,7 @@ export const getQueueStats = async (req: Request, res: Response): Promise<void> 
 /**
  * Get monitoring metrics
  */
-export const getMetrics = async (req: Request, res: Response): Promise<void> => {
+export const getMetrics = async (_req: Request, res: Response): Promise<void> => {
   try {
     const metrics = await jobMonitor.collectMetrics();
 
@@ -468,7 +468,7 @@ export const getMetrics = async (req: Request, res: Response): Promise<void> => 
 /**
  * Get scheduler status
  */
-export const getSchedulerJobStatus = async (req: Request, res: Response): Promise<void> => {
+export const getSchedulerJobStatus = async (_req: Request, res: Response): Promise<void> => {
   try {
     const status = getSchedulerStatus();
 

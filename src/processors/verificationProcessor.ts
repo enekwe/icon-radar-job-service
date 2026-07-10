@@ -84,7 +84,7 @@ export class VerificationProcessor {
       logger.error(`Verification failed for athlete`, {
         jobId: job.id,
         athleteId,
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         processingTime,
       });
 
@@ -129,7 +129,7 @@ verificationQueue.process('verify-ownership', concurrency, async (job: Job<Verif
   try {
     return await processor.processVerification(job);
   } catch (error) {
-    await processor.handleJobRetry(job, error);
+    await processor.handleJobRetry(job, error instanceof Error ? error : new Error(String(error)));
     throw error;
   }
 });

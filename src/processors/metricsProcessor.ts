@@ -84,7 +84,7 @@ export class MetricsProcessor {
       logger.error(`Metrics collection failed for brand: ${brandName}`, {
         jobId: job.id,
         brandId,
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         processingTime,
       });
 
@@ -129,7 +129,7 @@ metricsQueue.process('collect-metrics', concurrency, async (job: Job<MetricsJobD
   try {
     return await processor.processMetrics(job);
   } catch (error) {
-    await processor.handleJobRetry(job, error);
+    await processor.handleJobRetry(job, error instanceof Error ? error : new Error(String(error)));
     throw error;
   }
 });

@@ -296,34 +296,34 @@ export function getSchedulerStatus(): {
   jobs: Array<{
     name: string;
     schedule: string;
-    nextRun: Date | null;
     isRunning: boolean;
+    isScheduled: boolean;
   }>;
 } {
   const jobStatuses = [
     {
       name: 'brand-discovery',
       schedule: '0 0 * * * (daily at midnight)',
-      nextRun: scheduledJobs.get('brand-discovery')?.nextDate()?.toDate() || null,
       isRunning: runningJobs.get('brand-discovery') || false,
+      isScheduled: scheduledJobs.has('brand-discovery'),
     },
     {
       name: 'metrics-collection',
       schedule: '0 */6 * * * (every 6 hours)',
-      nextRun: scheduledJobs.get('metrics-collection')?.nextDate()?.toDate() || null,
       isRunning: runningJobs.get('metrics-collection') || false,
+      isScheduled: scheduledJobs.has('metrics-collection'),
     },
     {
       name: 'scoring-recalculation',
       schedule: '0 2 * * * (daily at 2 AM)',
-      nextRun: scheduledJobs.get('scoring-recalculation')?.nextDate()?.toDate() || null,
       isRunning: runningJobs.get('scoring-recalculation') || false,
+      isScheduled: scheduledJobs.has('scoring-recalculation'),
     },
     {
       name: 'data-quality-check',
       schedule: '0 3 * * 0 (weekly on Sunday at 3 AM)',
-      nextRun: scheduledJobs.get('data-quality-check')?.nextDate()?.toDate() || null,
       isRunning: runningJobs.get('data-quality-check') || false,
+      isScheduled: scheduledJobs.has('data-quality-check'),
     },
   ];
 

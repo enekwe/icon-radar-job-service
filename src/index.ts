@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(sharedCorrelationId);
 
 // Health check endpoints
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', (_req: Request, res: Response) => {
   res.json({
     status: 'healthy',
     service: process.env.SERVICE_NAME || 'job-service',
@@ -36,7 +36,7 @@ app.get('/health', (req: Request, res: Response) => {
   });
 });
 
-app.get('/health/ready', async (req: Request, res: Response) => {
+app.get('/health/ready', async (_req: Request, res: Response) => {
   try {
     // Check if queues are accessible
     const health = {
@@ -72,7 +72,7 @@ app.use((req: Request, res: Response) => {
 });
 
 // Error handler
-app.use((err: Error, req: Request, res: Response, next: any) => {
+app.use((err: Error, req: Request, res: Response, _next: any) => {
   logger.error('Unhandled error:', {
     error: err.message,
     stack: err.stack,

@@ -72,10 +72,10 @@ export class PipelineProcessor {
         }
       );
 
-      const athletes = response.data.data || [];
+      const athletes: Array<{ id: string; name: string; sport?: string; brandIds?: string[] }> = response.data.data || [];
 
       if (athletes.length !== athleteIds.length) {
-        const foundIds = athletes.map((a: any) => a.id);
+        const foundIds = athletes.map((a) => a.id);
         const missingIds = athleteIds.filter(id => !foundIds.includes(id));
         logger.warn(`Some athletes not found`, { missingIds, pipelineId });
       }
@@ -113,8 +113,8 @@ export class PipelineProcessor {
 
           if (result.status === 'fulfilled') {
             athleteResults.push({
-              athleteId: athlete.id,
-              athleteName: athlete.name,
+              athleteId: athlete?.id || 'unknown',
+              athleteName: athlete?.name || 'unknown',
               status: result.value.status,
               stepsCompleted: result.value.stepsCompleted,
               totalSteps: result.value.totalSteps,
@@ -122,8 +122,8 @@ export class PipelineProcessor {
             });
           } else {
             athleteResults.push({
-              athleteId: athlete.id,
-              athleteName: athlete.name,
+              athleteId: athlete?.id || 'unknown',
+              athleteName: athlete?.name || 'unknown',
               status: 'failed',
               stepsCompleted: 0,
               totalSteps: this.PIPELINE_STEPS.length,
@@ -188,7 +188,7 @@ export class PipelineProcessor {
       logger.error(`Pipeline processing failed`, {
         jobId: job.id,
         pipelineId,
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         totalProcessingTime,
       });
 
@@ -202,7 +202,7 @@ export class PipelineProcessor {
       // Emit pipeline failure event
       queueEventEmitter.emit('pipeline:failed', {
         pipelineId,
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
       });
 
       throw error;
@@ -345,7 +345,7 @@ export class PipelineProcessor {
       logger.error(`Athlete workflow failed`, {
         athleteId,
         athleteName,
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         stepsCompleted,
         totalSteps,
         processingTime,

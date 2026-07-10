@@ -3,7 +3,7 @@
  * Manages Bull queues for background job processing
  */
 
-import Queue, { Job, JobOptions } from 'bull';
+import Queue, { Job } from 'bull';
 import { EventEmitter } from 'events';
 import { logger } from '@enekwe/icon-radar-shared';
 import {

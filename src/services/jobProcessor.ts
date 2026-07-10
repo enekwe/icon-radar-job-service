@@ -3,7 +3,6 @@
  * Monitors and tracks job execution
  */
 
-import { Job } from 'bull';
 import { logger } from '@enekwe/icon-radar-shared';
 import { allQueues } from './queueManager';
 

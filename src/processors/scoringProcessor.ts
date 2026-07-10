@@ -81,7 +81,7 @@ export class ScoringProcessor {
       logger.error(`Champion Index scoring failed for athlete`, {
         jobId: job.id,
         athleteId,
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         processingTime,
       });
 
@@ -126,7 +126,7 @@ scoringQueue.process('calculate-index', concurrency, async (job: Job<ScoringJobD
   try {
     return await processor.processScoring(job);
   } catch (error) {
-    await processor.handleJobRetry(job, error);
+    await processor.handleJobRetry(job, error instanceof Error ? error : new Error(String(error)));
     throw error;
   }
 });

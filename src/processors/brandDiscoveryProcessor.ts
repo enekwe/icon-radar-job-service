@@ -83,7 +83,7 @@ export class BrandDiscoveryProcessor {
       logger.error(`Brand discovery failed for athlete: ${athleteName}`, {
         jobId: job.id,
         athleteId,
-        error: error.message,
+        error: error instanceof Error ? error.message : String(error),
         processingTime,
       });
 
@@ -128,7 +128,7 @@ brandDiscoveryQueue.process('discover-brands', concurrency, async (job: Job<Bran
   try {
     return await processor.processBrandDiscovery(job);
   } catch (error) {
-    await processor.handleJobRetry(job, error);
+    await processor.handleJobRetry(job, error instanceof Error ? error : new Error(String(error)));
     throw error;
   }
 });

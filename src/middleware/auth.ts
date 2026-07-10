@@ -30,7 +30,7 @@ export function requireServiceAuth(req: Request, res: Response, next: NextFuncti
 /**
  * Optional user context middleware (for user-facing endpoints)
  */
-export function optionalUserContext(req: Request, res: Response, next: NextFunction): void {
+export function optionalUserContext(req: Request, _res: Response, next: NextFunction): void {
   const userId = req.headers['x-user-id'] as string;
   const userEmail = req.headers['x-user-email'] as string;
   const userRole = req.headers['x-user-role'] as string;
