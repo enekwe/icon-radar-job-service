@@ -29,7 +29,7 @@ export class PipelineProcessor {
   private serviceApiKey: string;
 
   constructor() {
-    this.athleteServiceUrl = process.env.ATHLETE_SERVICE_URL || 'http://localhost:3002';
+    this.athleteServiceUrl = process.env.ATHLETE_SERVICE_URL || 'https://api.radar.passbook.vc';
     this.serviceApiKey = process.env.SERVICE_API_KEY || '';
   }
 

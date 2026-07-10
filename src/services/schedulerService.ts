@@ -43,9 +43,10 @@ async function scheduledBrandDiscovery(): Promise<void> {
   logger.info(`Starting ${jobName}`);
 
   try {
-    // Call athlete service to get athletes needing discovery
+    // Call backend to get athletes needing discovery
+    const athleteServiceUrl = process.env.ATHLETE_SERVICE_URL || 'https://api.radar.passbook.vc';
     const response = await axios.get(
-      `${process.env.ATHLETE_SERVICE_URL}/api/v1/athletes/needs-discovery`,
+      `${athleteServiceUrl}/api/v1/athletes/needs-discovery`,
       {
         headers: {
           'x-service-api-key': process.env.SERVICE_API_KEY,
@@ -93,9 +94,10 @@ async function scheduledMetricsCollection(): Promise<void> {
   logger.info(`Starting ${jobName}`);
 
   try {
-    // Call brand service to get brands needing metrics
+    // Call backend to get brands needing metrics
+    const brandServiceUrl = process.env.BRAND_SERVICE_URL || 'https://api.radar.passbook.vc';
     const response = await axios.get(
-      `${process.env.BRAND_SERVICE_URL}/api/v1/brands/needs-metrics`,
+      `${brandServiceUrl}/api/v1/brands/needs-metrics`,
       {
         headers: {
           'x-service-api-key': process.env.SERVICE_API_KEY,
@@ -143,9 +145,10 @@ async function scheduledScoringRecalculation(): Promise<void> {
   logger.info(`Starting ${jobName}`);
 
   try {
-    // Call athlete service to get athletes with brands
+    // Call backend to get athletes with brands
+    const athleteServiceUrl = process.env.ATHLETE_SERVICE_URL || 'https://api.radar.passbook.vc';
     const response = await axios.get(
-      `${process.env.ATHLETE_SERVICE_URL}/api/v1/athletes/with-brands`,
+      `${athleteServiceUrl}/api/v1/athletes/with-brands`,
       {
         headers: {
           'x-service-api-key': process.env.SERVICE_API_KEY,
