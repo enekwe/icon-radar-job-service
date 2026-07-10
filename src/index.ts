@@ -36,6 +36,14 @@ app.get('/health', (_req: Request, res: Response) => {
   });
 });
 
+app.get('/health/live', (_req: Request, res: Response) => {
+  res.json({
+    status: 'alive',
+    service: process.env.SERVICE_NAME || 'job-service',
+    timestamp: new Date().toISOString(),
+  });
+});
+
 app.get('/health/ready', async (_req: Request, res: Response) => {
   try {
     // Check if queues are accessible
